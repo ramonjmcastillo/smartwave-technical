@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ProductSize from "../../components/ProductSize";
 import axios from "axios";
+import ProductSize from "../../components/ProductSize";
 import ProductQuantity from "../../components/ProductQuantity";
 
 const Home = () => {
