@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ProductSize from "../../components/ProductSize";
 import ProductQuantity from "../../components/ProductQuantity";
+import useGetProductData from "../../hooks/useGetProductData";
 
 const Home = () => {
   const [productData, setProductData] = useState([]);
 
-  const getProductData = () => {
-    axios
-      .get(`https://sw-coding-challenge.herokuapp.com/api/v1/products`, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkNvZGVyIn0.B1QyKzKxzpxay1__A8B85ij32rqFoOIAFGDqBmqXhvs`,
-        },
-      })
-      .then((res) => {
-        setProductData(res.data.d);
-      });
-  };
+  const { getProductData } = useGetProductData();
 
   useEffect(() => {
-    getProductData();
+    getInitialData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getInitialData = async () => {
+    const data = await getProductData();
+    setProductData(data);
+  };
 
   return (
     <div className="home-container">
-      <ProductSize data={productData[0]} />
-      <div style={{ margin: "168px" }} />
-      <ProductQuantity data={productData[0]} />
+      {productData?.map((product, index) => {
+        return (
+          <div key={index}>
+            <ProductSize data={product} />
+            <div style={{ margin: "24px" }} />
+            <ProductQuantity data={product} />
+          </div>
+        );
+      })}
     </div>
   );
 };

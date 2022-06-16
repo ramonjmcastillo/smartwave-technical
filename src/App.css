@@ -6,7 +6,10 @@
 
 .App {
   background-color: gray;
-  height:100vh;
+}
+
+.home-container {
+  width:50%
 }
 
 .product-size-container {
@@ -85,7 +88,6 @@
   cursor: pointer;
   outline: none;
   background-color: white;
-
 }
 
 .sizes:first-child {

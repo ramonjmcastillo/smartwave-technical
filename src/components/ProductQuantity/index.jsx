@@ -11,8 +11,6 @@ const ProductQuantity = ({ data }) => {
     setProductQuantity((prev) => prev + num);
   };
 
-  console.log(data);
-
   return (
     <div className="product-quantity-container">
       <div style={{ display: "flex" }}>
@@ -38,7 +36,15 @@ const ProductQuantity = ({ data }) => {
             >
               -
             </button>
-            <input className="num" value={productQuantity} readOnly></input>
+            <input
+              className="num"
+              type="number"
+              value={productQuantity}
+              onChange={(e) => setProductQuantity(parseInt(e.target.value))}
+              onKeyDown={(e) =>
+                ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()
+              }
+            />
             <button
               onClick={() => changeFocusedQuantity(1)}
               className="plusminus"
