@@ -20,15 +20,16 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {productData?.map((product, index) => {
-        return (
-          <div key={index}>
-            <ProductSize data={product} />
-            <div style={{ margin: "24px" }} />
-            <ProductQuantity data={product} />
-          </div>
-        );
-      })}
+      {productData &&
+        productData.map((product, index) => {
+          return (
+            <div key={index}>
+              <ProductSize data={product} />
+              <div style={{ margin: "24px" }} />
+              <ProductQuantity data={product} />
+            </div>
+          );
+        })}
     </div>
   );
 };
